@@ -1,0 +1,568 @@
+/* ====== CONFIGURAÇÕES GERAIS ======== */
+
+/* Reset geral para remover margens e paddings padrão do navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Ativa rolagem suave ao clicar em links internos */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Variáveis globais de cores */
+:root {
+    --primaria: #4f46e5;
+    --secundaria: #7c3aed;       /* CORRIGIDO: era "secudaria" */
+    --escuro: #0f172a;
+    --maisEscuro: #0a0f1c;
+    --claro: #e2e8f0;
+    --vidro: rgba(255, 255, 255, 0.1);
+}
+
+/* Estilo geral do corpo da página */
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: var(--escuro);
+    color: var(--claro);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Faz o conteúdo principal crescer para empurrar o rodapé para baixo */
+main,
+section.hero,
+section.dev,
+section.projetos,
+section.contato,
+.caixa-projetos {
+    flex: 1 0 auto;
+}
+
+/* =======================================
+   CABEÇALHO / MENU
+======================================= */
+
+.topo {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: var(--maisEscuro);
+    z-index: 1000;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60px;
+}
+
+/* Botão hambúrguer — visível apenas em mobile */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+    z-index: 1100;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--claro);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animação do botão para mobile quando aberto */
+.menu-toggle.aberto span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+.menu-toggle.aberto span:nth-child(2) {
+    opacity: 0;
+}
+.menu-toggle.aberto span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Menu de navegação */
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    padding: 1rem 0;
+    width: 100%;
+}
+
+/* Links do menu */
+.link {
+    text-decoration: none;
+    color: var(--claro);
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 0;
+    white-space: nowrap;
+}
+
+/* Linha animada abaixo do link */
+.link::after {
+    content: '';
+    height: 2px;
+    width: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, var(--primaria), var(--secundaria));
+    transition: width 0.5s ease;
+}
+
+.link:hover::after {
+    width: 100%;
+}
+
+/* =======================================
+   SEÇÃO HERO (INDEX)
+======================================= */
+
+.hero {
+    flex: 1;
+}
+
+.container-hero {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+/* Foto de perfil — responsiva */
+.foto-perfil {
+    width: min(350px, 80vw);
+    height: min(350px, 80vw);
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
+    border-radius: 50%;
+    border: 4px solid var(--vidro);
+    object-fit: cover;
+}
+
+/* Título principal */
+h1 {
+    font-size: clamp(1.8rem, 5vw, 3.5rem);
+    color: var(--primaria);
+    font-weight: bold;
+    margin: 20px 10px 10px;
+    text-align: center;
+}
+
+/* Subtítulo */
+.sub-titulo {
+    font-size: clamp(1.1rem, 3vw, 2rem);
+    color: var(--claro);
+    text-align: center;
+}
+
+/* =======================================
+   SEÇÃO SOBRE MIM
+======================================= */
+
+.dev {
+    padding: 6rem 2rem;
+}
+
+.dev h2 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    color: var(--claro);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sobre {
+    padding: 2rem;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 16px;
+    border: 1px solid var(--vidro);
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.sobre p {
+    text-align: center;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    line-height: 1.7;
+}
+
+/* =======================================
+   PÁGINA DE PROJETOS
+======================================= */
+
+.caixa-projetos {
+    text-align: center;
+    padding: 4rem 2rem 0;
+}
+
+.caixa-projetos h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 30px;
+}
+
+.projetos {
+    padding: 2rem 2rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Card de projeto */
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--vidro);
+    overflow: hidden;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.card img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card:hover {
+    box-shadow: 0 10px 30px rgba(79, 70, 229, 0.2);
+    transform: translateY(-10px) scale(1.03);
+}
+
+.caixa-texto {
+    padding: 1.5rem;
+    flex: 1;
+}
+
+.card h3 {
+    color: white;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--claro);
+}
+
+/* =======================================
+   PÁGINA DE CONTATO
+======================================= */
+
+.contato {
+    padding: 4rem 1.5rem;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--vidro);
+}
+
+.contato h2 {
+    text-align: center;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 2rem;     /* CORRIGIDO: era 100px — excessivo para mobile */
+}
+
+/* Grupos de campo */
+.campo-form {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+/* Labels */
+.caixa-label {
+    font-size: 0.95rem;
+    color: var(--claro);
+    font-weight: 500;
+}
+
+/* Campos de input/textarea */
+.caixa-nome {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    color: var(--claro);
+    border: 1px solid var(--vidro);
+    outline: none;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+.caixa-nome:focus {
+    border-color: var(--secundaria);
+    box-shadow: 0 0 10px rgba(79, 70, 229, 0.3);
+}
+
+/* Botão do formulário */
+.botao-form {
+    color: var(--claro);
+    background: linear-gradient(45deg, var(--primaria), var(--secundaria));
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+    font-size: 1rem;
+    transition: all 0.5s ease;
+    margin-top: 0.5rem;
+}
+
+.botao-form:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
+}
+
+/* =======================================
+   RODAPÉ — TOTALMENTE RESPONSIVO
+======================================= */
+
+.rodape {
+    flex-shrink: 0;
+    background-color: var(--maisEscuro);
+    color: var(--claro);
+    padding: 1.5rem 2rem;
+    font-size: 14px;
+    margin-top: auto;
+    border-top: 1px solid var(--vidro);
+}
+
+/* Conteúdo do rodapé em linha (desktop) */
+.rodape-conteudo {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem 2rem;
+    text-align: center;
+}
+
+/* Links do rodapé */
+.rodape a {
+    color: var(--claro);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.rodape a:hover {
+    color: var(--primaria);
+    text-decoration: underline;
+}
+
+/* Selo CSS W3C — tamanho responsivo */
+.selo-css {
+    border: 0;
+    width: 88px;
+    height: 31px;
+    display: block;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.selo-css:hover {
+    opacity: 1;
+}
+
+/* =======================================
+   RESPONSIVIDADE — MEDIA QUERIES
+======================================= */
+
+/* ---- Tablets (≤ 768px) ---- */
+@media (max-width: 768px) {
+
+    /* Menu para mobile visível */
+    .menu-toggle {
+        display: flex;
+    }
+
+    /* Menu colapsa em mobile */
+    .menu {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: var(--maisEscuro);
+        border-top: 1px solid var(--vidro);
+        padding: 0.5rem 0;
+        z-index: 999;
+    }
+
+    .menu.aberto {
+        display: flex;
+    }
+
+    .menu .link {
+        padding: 0.9rem 1.5rem;
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .menu .link::after {
+        display: none;
+    }
+
+    /* Cards em coluna única */
+    .projetos {
+        grid-template-columns: 1fr;
+        padding: 1.5rem 1rem 3rem;
+    }
+
+    /* Rodapé empilhado em coluna */
+    .rodape-conteudo {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    /* Reduz margens excessivas */
+    .dev {
+        padding: 4rem 1.5rem;
+    }
+
+    .contato {
+        padding: 2.5rem 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* ---- Celulares pequenos (≤ 480px) ---- */
+@media (max-width: 480px) {
+
+    h1 {
+        font-size: 1.7rem;
+    }
+
+    .sub-titulo {
+        font-size: 1rem;
+    }
+
+    .foto-perfil {
+        width: min(250px, 75vw);
+        height: min(250px, 75vw);
+    }
+
+    .container-hero {
+        padding: 2rem 0.75rem;
+        gap: 0.5rem;
+    }
+
+    .dev {
+        padding: 3rem 1rem;
+    }
+
+    .dev h2 {
+        font-size: 1.6rem;
+    }
+
+    .sobre {
+        padding: 1.5rem;
+    }
+
+    .contato {
+        padding: 2rem 1rem;
+        border-radius: 12px;
+        margin: 0 0.5rem 1.5rem;
+    }
+
+    .contato h2 {
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .botao-form {
+        padding: 0.85rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .caixa-projetos {
+        padding: 2.5rem 1rem 0;
+    }
+
+    .projetos {
+        padding: 1rem 0.75rem 2.5rem;
+        gap: 1.5rem;
+    }
+
+    .card img {
+        height: 160px;
+    }
+
+    .rodape {
+        padding: 1.2rem 1rem;
+        font-size: 13px;
+    }
+
+    .selo-css {
+        width: 70px;
+        height: 24px;
+    }
+}
+
+/* ---- Telas muito pequenas (≤ 320px) ---- */
+@media (max-width: 320px) {
+
+    .topo {
+        padding: 0 0.75rem;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    .foto-perfil {
+        width: 200px;
+        height: 200px;
+    }
+
+    .sobre p {
+        font-size: 0.9rem;
+    }
+
+    .caixa-nome {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+}
